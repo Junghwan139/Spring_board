@@ -24,7 +24,7 @@ public class s1Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false,name="author_id")
-    private s1Author author_id;
+    private s1Author author;
 
     @Column
     private LocalDateTime createDate;

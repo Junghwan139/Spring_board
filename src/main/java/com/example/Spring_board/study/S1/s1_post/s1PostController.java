@@ -1,6 +1,6 @@
 package com.example.Spring_board.study.S1.s1_post;
 
-import com.example.Spring_board.study.S1.s1_author.s1AuthorService;
+import com.example.Spring_board.study.S1.s1_author.s1Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,13 @@ public class s1PostController {
     //find_one
     @GetMapping("s1_post")
     public String s1_post_one(@RequestParam(value="id")Long myid,Model model){
-        model.addAttribute("post",s1posv.s1_findOne(myid));
+
+        s1Post post1 = s1posv.s1_findOne(myid);
+        model.addAttribute("post",post1);
+        s1Author author1 = post1.getAuthor();
+        System.out.println("id : "+author1.getId());
+        System.out.println("이름 : "+author1.getName());
+        System.out.println("email : "+author1.getEmail());
         return "s1/s1_post_detail";
     }
 
@@ -50,6 +56,8 @@ public class s1PostController {
         s1posv.s1_delete(myid);
         return "redirect:/s1_posts";
     }
+
+
 
 
 

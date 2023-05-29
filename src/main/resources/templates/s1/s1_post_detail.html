@@ -41,40 +41,42 @@
     <h1>게시물 상세 정보</h1>
   </div>
 
-  <table class="table">
-    <tr>
-      <td>Id:</td>
-      <td th:text="${post.id}"></td>
-    </tr>
-    <tr>
-      <td>Title:</td>
-      <td th:text="${post.title}"></td>
-    </tr>
-    <tr>
-      <td>Contents:</td>
-      <td th:text="${post.contents}"></td>
-    </tr>
-    <tr>
-      <td>Author:</td>
-      <td th:text="${post.author_id}"></td>
-    </tr>
-    <tr>
-      <td>Create Date:</td>
-      <td th:text="${post.createDate}"></td>
-    </tr>
-  </table>
+  <form action="#" method="POST">
+    <table class="table">
+      <tr>
+        <td>Id:</td>
+        <td><span th:text="${post.id}"></span></td>
+      </tr>
+      <tr>
+        <td>Title:</td>
+        <td><input type="text" name="title" th:value="${post.title}" /></td>
+      </tr>
+      <tr>
+        <td>Contents:</td>
+        <td><textarea name="contents" rows="5" th:text="${post.contents}"></textarea></td>
+      </tr>
+      <tr>
+        <td>Author:</td>
+        <td><span th:text="${post.author.email}"></span></td>
+      </tr>
+      <tr>
+        <td>Create Date:</td>
+        <td><span th:text="${post.createDate}"></span></td>
+      </tr>
+    </table>
 
-  <div class="pull-right">
-    <a href="s1_posts" class="btn btn-primary">목록으로</a>
-    <!-- 글 삭제 기능 -->
-    <a th:href="@{/s1_post_delete(id=${post.id})}" class="btn btn-primary">삭제</a>
+    <div class="pull-right">
+      <a href="s1_posts" class="btn btn-primary">목록으로</a>
+      <input type="submit" class="btn btn-primary" value="수정" />
+      <!-- 글 삭제 기능 -->
+      <a th:href="@{/s1_post_delete(id=${post.id})}"
+         class="btn btn-primary">삭제</a>
+    </div>
 
-  </div>
+  </form>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
