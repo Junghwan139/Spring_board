@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>게시물 상세 정보</title>
+  <style>
+    .pull-right {
+        float: right;
+        margin-left: 10px;
+    }
+
+    .btn-primary {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="s1_home">게시판 서비스</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="s1_authors">회원관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="s1_posts">글목록</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>게시물 상세 정보</h1>
+  </div>
+
+  <table class="table">
+    <tr>
+      <td>Id:</td>
+      <td th:text="${post.id}"></td>
+    </tr>
+    <tr>
+      <td>Title:</td>
+      <td th:text="${post.title}"></td>
+    </tr>
+    <tr>
+      <td>Contents:</td>
+      <td th:text="${post.contents}"></td>
+    </tr>
+    <tr>
+      <td>Author:</td>
+      <td th:text="${post.author_id}"></td>
+    </tr>
+    <tr>
+      <td>Create Date:</td>
+      <td th:text="${post.createDate}"></td>
+    </tr>
+  </table>
+
+  <div class="pull-right">
+    <a href="s1_posts" class="btn btn-primary">목록으로</a>
+    <!-- 글 삭제 기능 -->
+    <a th:href="@{/s1_post_delete(id=${post.id})}" class="btn btn-primary">삭제</a>
+
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>회원관리</title>
+    <title>게시글 관리</title>
     <style>
         .pull-right {
             float: right;
@@ -40,13 +40,13 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>회원 목록</h1>
+        <h1>게시글 목록</h1>
+    </div>
+    <div class="pull-right">
+        <a href="s1_post_write" class="btn btn-primary">글쓰기</a>
     </div>
     <div class="pull-right">
         <a href="/" class="btn btn-primary">로그인</a>
-    </div>
-    <div class="pull-right">
-        <a href="s1_save" class="btn btn-primary">회원가입</a>
     </div>
     <br/><br/><br/>
 
@@ -54,22 +54,23 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="col-md-1">id</th>
-                <th class="col-md-2">이름</th>
-                <th class="col-md-3">email</th>
-                <th class="col-md-2">role</th>
-                <th class="col-md-2">created_at</th>
-                <th class="col-md-2">상세보기</th>
+                <th class="col-md-3">상세보기</th>
+                <th class="col-md-1">ID</th>
+                <th class="col-md-3">제목</th>
+                <th class="col-md-4">내용</th>
+                <th class="col-md-2">작성일</th>
+                <th class="col-md-2">작성자</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="author : ${authorList}">
-                <td th:text="${author.id}"></td>
-                <td th:text="${author.name}"></td>
-                <td th:text="${author.email}"></td>
-                <td th:text="${author.role}"></td>
-                <td th:text="${author.created_at}"></td>
-                <td><a th:href="@{'s1_author?id=' + ${author.id}}">상세보기</a></td>
+            <tr th:each="post : ${posts}">
+                <td><a th:href="@{'s1_post?id=' + ${post.id}}">상세보기</a></td>
+                <td th:text="${post.id}"></td>
+                <td th:text="${post.title}"></td>
+                <td th:text="${post.contents}"></td>
+                <td th:text="${post.createDate}"></td>
+                <td th:text="${post.author_id}"></td>
+
             </tr>
             </tbody>
         </table>
@@ -77,8 +78,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core
-.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>

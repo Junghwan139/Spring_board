@@ -23,8 +23,8 @@ public class s1Post {
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false,name="author_email", referencedColumnName = "email")
-    private s1Author author;
+    @JoinColumn(nullable = false,name="author_id")
+    private s1Author author_id;
 
     @Column
     private LocalDateTime createDate;
