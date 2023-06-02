@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class s1PostController {
@@ -45,7 +46,6 @@ public class s1PostController {
     // write_post
     @PostMapping("s1_post_write")
     public String s1_post_write_p(s1Post post){
-        post.setCreateDate(LocalDateTime.now());
         s1posv.s1_save(post);
         return "redirect:/s1_posts";
     }
@@ -57,8 +57,12 @@ public class s1PostController {
         return "redirect:/s1_posts";
     }
 
-
-
+    // update
+    @PostMapping("s1_post_update")
+    public String s1_post_up(@RequestParam (value = "id")Long myid,s1Post post){
+        s1posv.s1_update(post,myid);
+        return "redirect:/s1_posts";
+    }
 
 
 

@@ -1,5 +1,7 @@
 package com.example.Spring_board.study.S1.s1_author;
 
+import com.example.Spring_board.study.S1.s1_post.s1Post;
+import com.example.Spring_board.study.S1.s1_post.s1PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import java.time.LocalDateTime;
 public class s1AuthorController {
 
     @Autowired s1AuthorService s1sv;
+    @Autowired s1PostService s1posv;
+
 
     //home
     @GetMapping("s1_home")
@@ -44,7 +48,17 @@ public class s1AuthorController {
     // find_one
     @GetMapping("s1_author")
     public String s1_author(@RequestParam(value = "id")Long myid,Model model){
-        model.addAttribute("author",s1sv.findByid(myid));
+        s1Author author1 = s1sv.findByid(myid);
+        model.addAttribute("author",author1);
+
+        int count = 0;
+        for(s1Post a : s1posv.s1_findAll()){
+            if(a.getAuthor().getId() == author1.getId()){
+                count++;
+            }
+        }
+        System.out.println(count);
+
         return "s1/s1_detail";
     }
 
