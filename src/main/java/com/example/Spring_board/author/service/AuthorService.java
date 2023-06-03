@@ -1,6 +1,7 @@
 package com.example.Spring_board.author.service;
 
 import com.example.Spring_board.author.domain.Author;
+import com.example.Spring_board.author.etc.AuthorRequestDto;
 import com.example.Spring_board.author.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class AuthorService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+
 
     //생성
     public void create(Author author) throws SQLException {
@@ -32,17 +35,31 @@ public class AuthorService {
         return member;
     }
 
+//    public Author findEmail(Long id) throws EntityNotFoundException {
+//        Author member = authorRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+//        return member;
+//    }
+
+    public Author findByEmail(String email){
+        Author author = authorRepository.findByEmail(email);
+        return author;
+    }
+
+
+
     // 수정
-    public void update(Author author, Long id) throws Exception {
-        Author author1 = authorRepository.findById(author.getId()).orElse(null);
+    public void update(AuthorRequestDto authorRequestDto) throws Exception {
+        Author author1 = authorRepository.findById(Long.parseLong(authorRequestDto.getId())).orElseThrow(Exception::new);
         if (author1 == null) {
             throw new Exception();
         } else {
-            author1.setId(author.getId());
-            author1.setName(author.getName());
-            author1.setEmail(author.getEmail());
-            author1.setPassword(author.getPassword());
+
+            author1.setId(Long.parseLong(authorRequestDto.getId()));
+            author1.setName(authorRequestDto.getName());
+            author1.setEmail(authorRequestDto.getEmail());
+            author1.setPassword(authorRequestDto.getPassword());
             authorRepository.save(author1);
+
         }
     }
 

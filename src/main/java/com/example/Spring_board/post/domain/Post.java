@@ -1,15 +1,17 @@
 package com.example.Spring_board.post.domain;
 
 import com.example.Spring_board.author.domain.Author;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @Entity
+@NoArgsConstructor
 public class Post {
 
 
@@ -35,6 +37,15 @@ public class Post {
 
     @Column
     private LocalDateTime createDate;
+
+    @Builder
+    public Post(String title, String contents, Author author){
+        this.title = title;
+        this.contents = contents;
+        this.author=author;
+        this.createDate=LocalDateTime.now();
+
+    }
 
 
 

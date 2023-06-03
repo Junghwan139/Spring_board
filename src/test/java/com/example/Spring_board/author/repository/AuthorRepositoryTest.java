@@ -1,6 +1,7 @@
 package com.example.Spring_board.author.repository;
 
 import com.example.Spring_board.author.domain.Author;
+import com.example.Spring_board.author.etc.AuthorRequestDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,14 @@ public class AuthorRepositoryTest {
 
     @Test
     public void authorSave(){
-        Author authorInput = new Author();
-        authorInput.setName("hong");
-        authorInput.setEmail("hong@naver.com");
-        authorInput.setPassword("1234");
 
+        Author author1 = Author.builder()
+                .password("1234")  // 매개변수의 이름을 지정
+                .name("hong")
+                .email("hong@naver.com")
+                .build();
 
-        authorRepository.save(authorInput);
+        authorRepository.save(author1);
 
 
 //        저장된 데이터를 다시 조회해서, 입력한 테스트 데이터와 동일한지 검증
@@ -50,7 +52,7 @@ public class AuthorRepositoryTest {
 //        JUnit의 기능 활용
 //        Junit이란 java/spring에서 테스트 용도의 tool로 가장 많이 사용되는 라이브러리
 
-        Assertions.assertEquals(authorInput,authorDB);
+        Assertions.assertEquals(author1,authorDB);
 
 
 

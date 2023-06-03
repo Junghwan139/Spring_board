@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>회원관리</title>
+    <title>글쓰기</title>
     <style>
         .pull-right {
             float: right;
@@ -29,10 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="authors">회원관리</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="posts">글목록</a>
+                <a class="nav-link" href="/posts">글목록</a>
             </li>
         </ul>
     </div>
@@ -40,37 +37,27 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>회원 목록</h1>
+        <h1>글쓰기</h1>
     </div>
-    <div class="pull-right">
-        <a href="/" class="btn btn-primary">로그인</a>
-    </div>
-    <div class="pull-right">
-        <a href="/authors/new" class="btn btn-primary">회원가입</a>
-    </div>
-    <br/><br/><br/>
+    <form action="/post/new" method="post">
+        <div class="form-group">
+            <label>title</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>contents</label>
+            <input type="text" name="contents" class="form-control" style="width: 11    00px; height: 300px;">
+        </div>
 
-    <div id="mainHide">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th class="col-md-2">id</th>
-                <th class="col-md-3">이름</th>
-                <th class="col-md-4">email</th>
-                <th class="col-md-4">상세보기</th>
-                <!-- <th class="col-md-5">가입일</th> -->
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="author : ${authorList}">
-                <td th:text="${author.id}"></td>
-                <td th:text="${author.name}"></td>
-                <td th:text="${author.email}"></td>
-                <td><a th:href="@{'author?id=' + ${author.id}}">상세보기</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="form-group">
+            <label>author</label>
+            <input type="text" name="email" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">등록</button>
+        </div>
+    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

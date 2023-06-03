@@ -2,6 +2,7 @@ package com.example.Spring_board.author.controller;
 
 
 import com.example.Spring_board.author.domain.Author;
+import com.example.Spring_board.author.etc.AuthorRequestDto;
 import com.example.Spring_board.author.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -35,19 +35,31 @@ public class AuthorController {
 
     // 생성_post
     @PostMapping("authors/new")
-    public String authorCreateFrom(@RequestParam(value="name") String myname,
-                                   @RequestParam(value="email") String myemail,
-                                   @RequestParam(value="password") String mypassword,
-                                   @RequestParam(value="role") String myrole) throws SQLException {
+    public String authorCreateFrom(AuthorRequestDto authorRequestDto) throws SQLException {
+    // 실무에서는 setter 최대한 배제 -> 이유는 최초 객체 생성시점 뿐만아니라, 여러군대에서 setter를 통해 객체값을 변경가능하게 되어
+    // 데이터의 정확성을 보장하기 어렵고, 유비보수가 어렵다. 따라서 생성자를 통하여 매개변수로 입력 받음
 
-        Author author = new Author();
-        author.setName(myname);
-        author.setEmail(myemail);
-        author.setPassword(mypassword);
-        author.setCreateDate(LocalDateTime.now());
-        author.setRole(myrole);
+        // 방법1. setter 방식 : 최초시점 이외의 다른 클래스에서 객체를값을 변경함으로서, 유지보수의 어려움 발생
+        // 방법2. 생성자 방식 (setter배제) -> 문제점은 반드시 매개변수의 순서를 맞춰줘야 한다는 점이고, 매개변수가 많아지면 개발이 어려움
+//        Author author1 = new Author(
+//
+//                authorRequestDto.getName(),
+//                authorRequestDto.getEmail(),
+//                authorRequestDto.getPassword(),
+//                authorRequestDto.getRole()
+//
+//        );
+//
+        // 방법3. builder패턴 : 매개변수의 순서와 상관없이 객체 생성가능
 
-        authorService.create(author);
+        Author author1 = Author.builder()
+                        .password(authorRequestDto.getPassword())  // 매개변수의 이름을 지정
+                        .name(authorRequestDto.getName())
+                        .email(authorRequestDto.getEmail())
+                        .role(authorRequestDto.getRole())
+                        .build();
+
+        authorService.create(author1);
 
         return "redirect:/authors";   }
 
@@ -74,17 +86,9 @@ public class AuthorController {
 
 
     @PostMapping("author/update")
-    public String memberUpdate(@RequestParam(value="id") String myid,
-                               @RequestParam(value="name") String myname,
-                               @RequestParam(value="email") String myemail,
-                               @RequestParam(value="password") String mypassword) throws Exception {
+    public String memberUpdate(AuthorRequestDto authorRequestDto)  throws Exception {
 
-        Author author = new Author();
-        author.setId(Long.parseLong(myid));
-        author.setName(myname);
-        author.setEmail(myemail);
-        author.setPassword(mypassword);
-        authorService.update(author, author.getId());
+        authorService.update(authorRequestDto);
 
         return "redirect:/authors";
 
@@ -102,10 +106,6 @@ public class AuthorController {
         return "redirect:/authors";
 
     }
-
-
-
-
 
 
 
