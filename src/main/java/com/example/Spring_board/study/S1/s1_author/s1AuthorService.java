@@ -12,8 +12,14 @@ public class s1AuthorService {
     @Autowired s1AuthorRepository s1auRepo;
 
     // 저장
-    public void save(s1Author author){
-        s1auRepo.save(author);
+    public void save(s1AuthorRequestDto author){
+        s1Author author1 = s1Author.builder()
+                .name(author.getName())
+                .email(author.getEmail())
+                .role(author.getRole())
+                .password(author.getPassword())
+                .build();
+        s1auRepo.save(author1);
     }
 
     // 전체 조회

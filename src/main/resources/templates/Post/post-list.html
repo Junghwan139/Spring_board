@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>회원관리</title>
+    <title>게시글 관리</title>
     <style>
         .pull-right {
             float: right;
@@ -29,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="localhost:8080/authors">게시글 관리</a>
+                <a class="nav-link" href="authors">회원관리</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="posts">글목록</a>
@@ -65,7 +65,7 @@
                 <td th:text="${post.id}"></td>
                 <td th:text="${post.title}"></td>
                 <td th:text="${post.author.email}"></td>
-                <td><a th:href="@{'post/detail?id=' + ${post.id}}">상세보기</a></td>
+                <td><a th:href="@{'/post/detail?id=' + ${post.id}}">상세보기</a></td> <!-- 수정된 부분 -->
             </tr>
             </tbody>
         </table>

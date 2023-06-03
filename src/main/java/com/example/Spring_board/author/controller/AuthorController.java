@@ -87,9 +87,7 @@ public class AuthorController {
 
     @PostMapping("author/update")
     public String memberUpdate(AuthorRequestDto authorRequestDto)  throws Exception {
-
         authorService.update(authorRequestDto);
-
         return "redirect:/authors";
 
     }

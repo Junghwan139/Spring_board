@@ -46,6 +46,8 @@ public class PostService {
             post.setTitle(postRequestDto.getTitle());
             post.setContents(postRequestDto.getContents());
 
+            postRepository.save(post);
+
         }
     }
 

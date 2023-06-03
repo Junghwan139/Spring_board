@@ -33,7 +33,7 @@ public class Post {
 //    추후에 post테이블에서 author를 조회할 때 변수명으로 사용되고, 그 관계성을 ManyToOne으로 표현
 //    Author 테이블 입장에서는 1:N의 관계이고, Post테이블의 입장에서는 한 사람이 어러개의 글을 쓸 수 있으므로 N:1이다.
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, name="author_id")  // 다른 애들은 변수명이 이름인데 다름,,
+    @JoinColumn(nullable = false, name="author_id")  // author_id는 DB에 들어가는 이름.다른 애들은 변수명=DB 이름인데 다름,,
     private Author author;  // Author객체를 타입으로 지정 하였음. author의 id를 가져오라는 정보를 주지 않았는데,, 걸림
 
     @Column

@@ -32,8 +32,7 @@ public class s1AuthorController {
 
     //save_Post
     @PostMapping("s1_save")
-    public String s1_save_p(s1Author author){
-        author.setCreated_at(LocalDateTime.now());
+    public String s1_save_p(s1AuthorRequestDto author){
         s1sv.save(author);
         return "redirect:/s1_authors";
     }

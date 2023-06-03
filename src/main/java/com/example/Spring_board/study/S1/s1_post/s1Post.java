@@ -30,12 +30,4 @@ public class s1Post {
     private LocalDateTime createDate;
 
 
-
-
-
-
-
-
-
-
 }

@@ -71,7 +71,7 @@ public class PostController {
 
 
 
-    @PostMapping("post/post/update")
+    @PostMapping("post/update")
     public String memberUpdate(PostRequestDto postRequestDto)  throws Exception {
 
         postService.update(postRequestDto);

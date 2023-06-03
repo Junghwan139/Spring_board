@@ -31,14 +31,15 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="localhost:8080/authors">회원관리</a>
+        <a class="nav-link" href="/authors">회원관리</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="localhost:8080/post">글목록</a>
+        <a class="nav-link" href="/posts">글목록</a>
       </li>
     </ul>
   </div>
 </nav>
+
 
 <div class="container">
   <div class="page-header">
@@ -69,31 +70,37 @@
   </table>
 </div>
 
+<div class="container">
+  <div class="pull-right" style="display: flex; justify-content: flex-end;">
+    <a th:href="@{'/post/delete?id=' + ${post.id}}" class="btn btn-primary">글 삭제</a>
+    <span style="margin-right: 10px;"></span> <!-- 간격을 주는 요소 추가 -->
+    <button id="edit-button" class="btn btn-primary">글 수정</button>
+  </div>
+  <br>
 
-<div class="pull-right">
-  <button id="edit-button" class="btn btn-primary">글 정보 수정</button>
-</div>
-<div class="pull-right">
-  <a th:href="@{'/post/delete?id=' + ${post.id}}" class="btn btn-primary">글 정보 삭제</a>
-</div>
-<div id="edit-form" class="hidden">
-  <form action="post/update" method="post">
-    <div class="form-group">
-      <label for="id">id:</label>
-      <input type="text" class="form-control" id="id" name="id" th:value="${post.id}"readonly>
-    </div>
-    <div class="form-group">
-      <label for="title">title:</label>
-      <input type="text" class="form-control" id="title"  name="title" th:value="${post.title}">
-    </div>
-    <div class="form-group">
-      <label for="contents">contents:</label>
-      <input type="text" class="form-control" id="contents" name="contents" th:value="${post.contents}">
-    </div>
+  <div id="edit-form" class="hidden">
+    <form action="/post/update" method="post">
+      <div class="form-group">
+        <label for="id">id:</label>
+        <input type="text" class="form-control" id="id" name="id" th:value="${post.id}"readonly>
+      </div>
+      <div class="form-group">
+        <label for="title">title:</label>
+        <input type="text" class="form-control" id="title"  name="title" th:value="${post.title}">
+      </div>
+      <div class="form-group">
 
-    <button type="submit" class="btn btn-primary">수정 완료</button>
-  </form>
-</div>
+        <label for="contents">contents:</label>
+        <input type="text" class="form-control" id="contents" name="contents" th:value="${post.contents}">
+      </div>
+      <div class="form-group">
+        <label for="author">author:</label>
+        <input type="text" class="form-control" id="author" name="author" th:value="${post.author.email}" readonly>
+      </div>
+
+      <button type="submit" class="btn btn-primary">수정 완료</button>
+    </form>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
