@@ -36,8 +36,6 @@ public class Author {
     @Column //mysql에서는 datetime형식으로 컬럼 생성
     private LocalDateTime createDate;
 
-    
-    
 //    생성자 방식과 builder패턴
     @Builder
     public Author(String name, String email, String password, String role){
@@ -48,6 +46,5 @@ public class Author {
         this.createDate=LocalDateTime.now();
 
     }
-
 
 }
