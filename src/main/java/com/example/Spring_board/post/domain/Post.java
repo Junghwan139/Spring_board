@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Setter
 @NoArgsConstructor
 public class Post {
 

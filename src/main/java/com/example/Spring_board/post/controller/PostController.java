@@ -2,6 +2,7 @@ package com.example.Spring_board.post.controller;
 
 import com.example.Spring_board.author.controller.AuthorController;
 import com.example.Spring_board.author.domain.Author;
+import com.example.Spring_board.author.etc.AuthorRequestDto;
 import com.example.Spring_board.author.repository.AuthorRepository;
 import com.example.Spring_board.author.service.AuthorService;
 import com.example.Spring_board.post.domain.Post;
@@ -70,7 +71,27 @@ public class PostController {
 
 
 
+    @PostMapping("post/post/update")
+    public String memberUpdate(PostRequestDto postRequestDto)  throws Exception {
 
+        postService.update(postRequestDto);
+
+        return "redirect:/posts";
+
+    }
+
+
+
+    // deleteMapping을 사용할 수도 있지만, deleteMapping은 form태그에서는 지원하지 않는다.
+    // form태그에서 deleteMapping을 지원하지 않는다는 얘기는 aciton = "delete"를 줄 수 없다는 뜻
+    // 그래서, react나 vue.js와 같은 프론트엔드의 특정한 기술을 통해서 delete 요청을 일반적으로 하므로,
+    // rest api 방식의 개발(json)에서는 deletemapping이 가능하다.
+    @GetMapping("post/delete")
+    public String postDelete(@RequestParam(value="id") String myid) throws SQLException {
+        postService.delete(Long.parseLong(myid));
+        return "redirect:/posts";
+
+    }
 
 
 

@@ -60,13 +60,40 @@
     </tr>
     <tr>
       <td>author:</td>
-      <td th:text="${post.author.email}"></td>
+      <td th:text="${post.author.name}"></td>
     </tr>
     <tr>
       <td>Create Date:</td>
       <td th:text="${post.createDate}"></td>
     </tr>
   </table>
+</div>
+
+
+<div class="pull-right">
+  <button id="edit-button" class="btn btn-primary">글 정보 수정</button>
+</div>
+<div class="pull-right">
+  <a th:href="@{'/post/delete?id=' + ${post.id}}" class="btn btn-primary">글 정보 삭제</a>
+</div>
+<div id="edit-form" class="hidden">
+  <form action="post/update" method="post">
+    <div class="form-group">
+      <label for="id">id:</label>
+      <input type="text" class="form-control" id="id" name="id" th:value="${post.id}"readonly>
+    </div>
+    <div class="form-group">
+      <label for="title">title:</label>
+      <input type="text" class="form-control" id="title"  name="title" th:value="${post.title}">
+    </div>
+    <div class="form-group">
+      <label for="contents">contents:</label>
+      <input type="text" class="form-control" id="contents" name="contents" th:value="${post.contents}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">수정 완료</button>
+  </form>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
