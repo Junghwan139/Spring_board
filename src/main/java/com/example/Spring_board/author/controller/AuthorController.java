@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Controller
@@ -103,6 +104,12 @@ public class AuthorController {
         authorService.delete(Long.parseLong(myid));
         return "redirect:/authors";
 
+    }
+
+
+    @GetMapping("author/login")
+    public String authorlogin(){
+        return "author/login";
     }
 
 

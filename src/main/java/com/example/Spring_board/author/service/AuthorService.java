@@ -4,14 +4,20 @@ import com.example.Spring_board.author.domain.Author;
 import com.example.Spring_board.author.etc.AuthorRequestDto;
 import com.example.Spring_board.author.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collections;
 import java.util.List;
 
 @Service
-public class AuthorService {
+public class AuthorService implements UserDetailsService {
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -71,7 +77,25 @@ public class AuthorService {
 
     }
 
+//    doLogin이라는 spring 내장 메서드가 실행이 될 때,
+//    UserDetailsService를 구현한 클래스의 loadByUsername이라는 메서드를 찾는 걸로 약속
+//    왜 authorservice에서 하냐면 findmyemail해서 찾아야 하는 기능이 필요한데 별도로 만들면 또 authorwired해야 하니까
 
+    @Override
+    // String username은 사용자가 화면에 입력한 eamil주소를 스프링이 받아서 loadUserByUsername에 넣어준다
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        // doLogin 내장 기능이 정상 실행되려면, DB에서 조회한 id/pw를 return해줘야 한다.
+
+        Author author = authorRepository.findByEmail(username);
+
+        if(author==null){
+
+        }
+
+        // DB에서 조회한 email, password, 권한을 return, 권한이 없다면 emptyList로 return
+        return new User(author.getEmail(),author.getPassword(), Collections.emptyList());
+    }
 
 
 }
