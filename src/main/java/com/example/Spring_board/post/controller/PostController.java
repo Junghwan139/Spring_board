@@ -46,6 +46,8 @@ public class PostController {
     public String postwrite(PostRequestDto post) throws SQLException {
       Author author1 = authorService.findByEmail(post.getEmail());
 
+        System.out.println(post.getAppointment());
+        System.out.println(post.getAppointment_time());
         Post post1 = Post.builder()
                 .title(post.getTitle())  // 매개변수의 이름을 지정
                 .contents(post.getContents())

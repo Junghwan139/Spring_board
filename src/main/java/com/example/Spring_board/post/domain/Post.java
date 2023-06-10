@@ -36,6 +36,13 @@ public class Post {
     @JoinColumn(nullable = false, name="author_id")  // author_id는 DB에 들어가는 이름.다른 애들은 변수명=DB 이름인데 다름,,
     private Author author;  // Author객체를 타입으로 지정 하였음. author의 id를 가져오라는 정보를 주지 않았는데,, 걸림
 
+    @Column(length = 1)
+    private String appointment;
+
+    @Column
+    private LocalDateTime appointment_time;
+
+
     @Column
     private LocalDateTime createDate;
 
@@ -47,6 +54,8 @@ public class Post {
         this.createDate=LocalDateTime.now();
 
     }
+
+
 
 
 

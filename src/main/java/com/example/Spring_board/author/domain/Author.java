@@ -27,7 +27,7 @@ public class Author {
     private String email;
 
     @Setter
-    @Column(length = 20)
+    @Column(length = 255)
     private String password;
 
     @Column(length = 10)
