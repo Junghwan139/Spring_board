@@ -47,11 +47,13 @@ public class Post {
     private LocalDateTime createDate;
 
     @Builder
-    public Post(String title, String contents, Author author){
+    public Post(String title, String contents, Author author, String appointment, LocalDateTime appointment_time){
         this.title = title;
         this.contents = contents;
         this.author=author;
         this.createDate=LocalDateTime.now();
+        this.appointment = appointment;
+        this.appointment_time=appointment_time;
 
     }
 
