@@ -17,6 +17,9 @@
             font-size: 18px;
             color: #000000;
         }
+        .nav-link {
+        display: inline-block;
+    }
     </style>
 
 
@@ -40,6 +43,7 @@
             </li>
             <li class="nav-item">
                 <td th:if="${session.my_greeting}!=null"><a class="nav-link" href="/doLogout">로그아웃</a></td>
+                <td th:if="${session.my_greeting}==null"><a class="nav-link" href="/authors/new">회원가입</a></td>
                 <td th:if="${session.my_greeting}==null"><a class="nav-link" href="/author/login">로그인</a></td>
             </li>
         </ul>
