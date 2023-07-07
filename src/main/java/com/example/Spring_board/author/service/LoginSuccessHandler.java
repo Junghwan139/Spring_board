@@ -21,5 +21,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         response.sendRedirect("/");   // 로그인 성공시 홈화면으로 튕겨주기
 
+
     }
 }
